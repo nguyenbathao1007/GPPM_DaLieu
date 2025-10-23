@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_from_directory
+
+
 from backend.utils.image_processing import encode_image_to_base64
 from backend.models.ai_model import analyze_skin_json
 
@@ -30,3 +32,8 @@ def analyze():
         return jsonify({"error": "Ảnh quá lớn sau khi nén"}), 413
     out = analyze_skin_json(desc, b64, mime)
     return jsonify(out), 200
+# @app.route("/")
+# def serve_index():
+#     from pathlib import Path
+#     frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
+#     return send_from_directory(frontend_dir, "index.html")
